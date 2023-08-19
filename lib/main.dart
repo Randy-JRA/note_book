@@ -13,9 +13,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Note Book',
-      theme: ThemeData(primarySwatch: Colors.green),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.green).copyWith(background: Colors.grey),
+      ),
       home: const NotesPage(),
     );
   }
 }
-

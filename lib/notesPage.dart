@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:note_book/todosPage.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({Key? key}) : super(key: key);
@@ -16,23 +17,23 @@ class _NotesPageState extends State<NotesPage> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Column(
-          children:<Widget>[
-            Container(
-              margin: const EdgeInsets.all(20.0),
-              padding: const EdgeInsets.all(12.0),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text("Notes",style: TextStyle(color:Colors.white,fontSize:20),),
-                ],
-              ),
+        children:<Widget>[
+          Container(
+            margin: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(12.0),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text("Notes",style: TextStyle(color:Colors.white,fontSize:20),),
+              ],
             ),
-            Container(
+          ),
+          Container(
               margin: const EdgeInsets.all(20.0),
               padding: const EdgeInsets.fromLTRB(8, 3, 3, 3),
               decoration:BoxDecoration(
-                  borderRadius:BorderRadius.circular(50),
-                  color:Colors.brown,
+                borderRadius:BorderRadius.circular(50),
+                color:Colors.brown,
               ),
               child: const TextField(
                 decoration: InputDecoration(
@@ -42,17 +43,17 @@ class _NotesPageState extends State<NotesPage> {
 
                 ),
               )
+          ),
+          Container(
+            margin: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(12.0),
+            decoration:BoxDecoration(
+              borderRadius:BorderRadius.circular(8),
+              color:Colors.grey,
             ),
-            Container(
-              margin: const EdgeInsets.all(20.0),
-              padding: const EdgeInsets.all(12.0),
-              decoration:BoxDecoration(
-                  borderRadius:BorderRadius.circular(8),
-                  color:Colors.grey,
-              ),
-              child: const Text('Task'),
-            ),
-          ],
+            child: const Text('Task'),
+          ),
+        ],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
@@ -67,6 +68,10 @@ class _NotesPageState extends State<NotesPage> {
           setState(() {
             myIndex = index;
           });
+          if (index == 1) {
+            //navigate to todos page.
+            Navigator.push(context, MaterialPageRoute(builder: (context) => TodosPage()));
+          }
         },
         currentIndex: myIndex,
         items: const [
@@ -85,6 +90,3 @@ class _NotesPageState extends State<NotesPage> {
     );
   }
 }
-
-
-

@@ -11,10 +11,26 @@ class TodosPage extends StatefulWidget {
 
 class _TodosPageState extends State<TodosPage> {
   int myIndex = 0;
+  bool isInputFieldVisible = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (context){
+              return [
+                const PopupMenuItem<int>(
+                  value: 0,
+                  child: Text('Sort by alert time'),
+                ),
+              ];
+            },
+          ),
+        ],
+      ),
       backgroundColor: Colors.black,
       body: Column(
         children:<Widget>[
@@ -44,19 +60,63 @@ class _TodosPageState extends State<TodosPage> {
                 ),
               )
           ),
-          Container(
-            margin: const EdgeInsets.all(20.0),
-            padding: const EdgeInsets.all(12.0),
-            decoration:BoxDecoration(
-              borderRadius:BorderRadius.circular(8),
-              color:Colors.grey,
-            ),
-            child: const Text('Task'),
-          ),
         ],
+
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          showModalBottomSheet<void>(
+            context: context,
+            builder: (BuildContext context) {
+              return Container(
+                height: 200,
+                color: Colors.black,
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisSize: MainAxisSize.min,
+                    children: <Widget> [
+                      Container(
+                        margin: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.fromLTRB(8, 3, 3, 3),
+                        decoration:BoxDecoration(
+                          borderRadius:BorderRadius.circular(10),
+                          color:Colors.brown,
+                        ),
+                        child: const TextField(
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                            hintText: 'Add a to-do item',
+                          ),
+                        ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          ElevatedButton.icon(
+                            onPressed: () => Navigator.pop(context),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.brown,
+                            ),
+                            icon: const Icon(Icons.alarm, size: 15,),
+                            label: const Text("Set Alerts"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () => Navigator.pop(context),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.transparent,
+                            ),
+                            child: const Text("Save"),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              );
+            }
+          );
+          },
         backgroundColor: Colors.blue,
         foregroundColor: Colors.white,
         child: const Icon(Icons.add),
@@ -70,7 +130,7 @@ class _TodosPageState extends State<TodosPage> {
           });
           if (index == 0) {
             //navigate to Notes page.
-            Navigator.push(context, MaterialPageRoute(builder: (context) => NotesPage()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => NotesPage()));
           }
         },
         currentIndex: myIndex,

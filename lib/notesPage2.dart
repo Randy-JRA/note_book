@@ -1,32 +1,51 @@
 import 'package:flutter/material.dart';
 import 'package:note_book/todosPage.dart';
 
-import 'notesPage2.dart';
-
-class NotesPage extends StatefulWidget {
-  const NotesPage({Key? key}) : super(key: key);
+class NotesPage2 extends StatefulWidget {
+  const NotesPage2({Key? key}) : super(key: key);
 
   @override
-  State<NotesPage> createState() => _NotesPageState();
+  State<NotesPage2> createState() => _NotesPage2State();
 }
 
-class _NotesPageState extends State<NotesPage> {
-
+class _NotesPage2State extends State<NotesPage2> {
   int myIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        title: const Text('Notes'),
+        backgroundColor: Colors.black,
+      ),
       body: Column(
         children:<Widget>[
           Container(
             margin: const EdgeInsets.all(20.0),
             padding: const EdgeInsets.all(12.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.brown,
+            ),
             child: const Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text("Notes",style: TextStyle(color:Colors.white,fontSize:20),),
+                Text('time',style: TextStyle(color:Colors.white,fontSize:20),),
+              ],
+            ),
+          ),
+          Container(
+            margin: const EdgeInsets.all(20.0),
+            padding: const EdgeInsets.all(12.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              color: Colors.brown,
+            ),
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Text("Date",style: TextStyle(color:Colors.white,fontSize:20),),
               ],
             ),
           ),
@@ -34,42 +53,20 @@ class _NotesPageState extends State<NotesPage> {
               margin: const EdgeInsets.all(20.0),
               padding: const EdgeInsets.fromLTRB(8, 3, 3, 3),
               decoration:BoxDecoration(
-                borderRadius:BorderRadius.circular(50),
+                borderRadius:BorderRadius.circular(5),
                 color:Colors.brown,
               ),
               child: const TextField(
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  icon: Icon(Icons.search),
-                  hintText: 'Search Notes',
+                  hintText: 'Note something down',
 
                 ),
               )
           ),
-          Container(
-            margin: const EdgeInsets.all(20.0),
-            padding: const EdgeInsets.all(12.0),
-            decoration:BoxDecoration(
-              borderRadius:BorderRadius.circular(8),
-              color:Colors.grey,
-            ),
-            child: const Text('Task'),
-          ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          //Navigate to the notes page
-          Navigator.push(
-            context, MaterialPageRoute(builder: (context) => NotesPage2()));
-        },
-        backgroundColor: Colors.blue,
-        foregroundColor: Colors.white,
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.brown,
         onTap: (index) {
           setState(() {
             myIndex = index;
@@ -82,13 +79,22 @@ class _NotesPageState extends State<NotesPage> {
         currentIndex: myIndex,
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.book),
-            label: 'Notes',
+            backgroundColor: Colors.brown,
+            icon: Icon(Icons.album),
+            label: 'Albums',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.audio_file),
+            label: 'Audio',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.done),
-            label: 'To-dos',
-          )
+            label: 'To-do List',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.lock_clock),
+            label: 'Reminder',
+          ),
         ],
         iconSize: 30,
         fixedColor: Colors.blue,
